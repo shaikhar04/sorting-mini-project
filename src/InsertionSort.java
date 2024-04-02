@@ -40,9 +40,11 @@ public class InsertionSort implements Sorter {
     int inPointer;;
 
     while (outPointer < values.length) {
-      inPointer = outPointer;
-      while (inPointer >= 0) {
-        
+      inPointer = outPointer - 1;
+      while (inPointer > 0) {
+        if (order.compare(values[inPointer], values[inPointer - 1]) > 0) {
+
+        }
       } // while (inPointer)
     } // while (outPointer)
   } // sort(T[], Comparator<? super T>
