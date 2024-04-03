@@ -37,15 +37,17 @@ public class InsertionSort implements Sorter {
     int outPointer = 1;
 
     // Used to traverse and sort the sorted portion
-    int inPointer;;
+    int inPointer;
 
     while (outPointer < values.length) {
-      inPointer = outPointer - 1;
+      inPointer = outPointer;
       while (inPointer > 0) {
-        if (order.compare(values[inPointer], values[inPointer - 1]) > 0) {
-
+        if (order.compare(values[inPointer - 1], values[inPointer]) > 0) {
+          Helper.swap(values, inPointer, inPointer - 1);
         }
-      } // while (inPointer)
-    } // while (outPointer)
+        inPointer--;
+      } // while inPointer
+      outPointer++;
+    } // while outPointer
   } // sort(T[], Comparator<? super T>
 } // class InsertionSort
