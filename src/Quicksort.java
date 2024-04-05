@@ -3,7 +3,7 @@ import java.util.Comparator;
 /**
  * Sort using Quicksort.
  *
- * @author Your Name Here
+ * @author Arsal Shaikh
  */
 
 public class Quicksort implements Sorter {
@@ -51,15 +51,8 @@ public class Quicksort implements Sorter {
 
   @Override
   public <T> void sort(T[] values, Comparator<? super T> order) {
-    int pivot = partition(values, order);
+    quicksort(values, order, 0, values.length);
   } // sort(T[], Comparator<? super T>
-
-  /**
-   * Partition an array.
-   */
-  public <T> void partition(T[] values, Comparator<? super T> order) {
-    partition(values, order, 0, values.length);
-  } // partition(T[], Comparator<? super T>)
 
   // +----------------------+----------------------------------------
   // | Semi-private methods |
@@ -71,7 +64,15 @@ public class Quicksort implements Sorter {
    */
   public static <T> void quicksort(T[] values, Comparator<? super T> order,
       int lb, int ub) {
-    // STUB
+      // Base case
+        if (ub - lb == 1) {
+        return;
+      } 
+
+      int pivot = partition(values, order, lb, ub);
+      quicksort(values, order, lb, pivot);
+      quicksort(values, order, pivot, ub);
+
   } // quicksort(T[], Comparator<? super T>, lb, ub)
 
   /**
@@ -95,21 +96,28 @@ public class Quicksort implements Sorter {
 
     // pivot swap
     Helper.swap(arr, small, pivot);
-    small = pivot + 1;
     pivot = lb;
+    small = lb + 1;
 
-    while (small != large) {
+    while (small < large) {
       // compare with small
-      if (order.compare(arr[pivot], arr[small]) <= 0) {
+      if (order.compare(arr[pivot], arr[small]) < 0) {
         Helper.swap(arr, small, large - 1);
         large--;
       } else {
         small++;
+        continue;
+      }
+
+      // break if sorting complete
+      if (!(small < large)) {
+        break;
       }
 
       // compare with large
-      if (order.compare(arr[pivot], arr[large - 1]) < 0) {
+      if (order.compare(arr[pivot], arr[large - 1]) <= 0) {
         large--;
+        continue;
       } else {
         Helper.swap(arr, small, large - 1);
         small++;
@@ -117,6 +125,9 @@ public class Quicksort implements Sorter {
     } // while
 
     // pivot unswap
+    if (small == ub) {
+      small--;
+    }
     Helper.swap(arr, small, pivot);
     pivot = small;
 
