@@ -6,7 +6,7 @@ import java.util.Comparator;
  * @author Arsal Shaikh
  */
 
-public class QuickSort implements Sorter {
+public class Quicksort implements Sorter {
 
   // +--------+------------------------------------------------------
   // | Fields |
@@ -15,7 +15,7 @@ public class QuickSort implements Sorter {
   /**
    * The one sorter you can access.
    */
-  public static Sorter SORTER = new QuickSort();
+  public static Sorter SORTER = new Quicksort();
 
   // +--------------+------------------------------------------------
   // | Constructors |
@@ -24,7 +24,7 @@ public class QuickSort implements Sorter {
   /**
    * Create a sorter.
    */
-  QuickSort() {
+  Quicksort() {
   } // Quicksort()
 
   // +---------+-----------------------------------------------------
